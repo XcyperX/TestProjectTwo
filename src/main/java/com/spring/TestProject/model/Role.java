@@ -2,18 +2,25 @@ package com.spring.TestProject.model;
 
 import org.springframework.security.core.GrantedAuthority;
 
-public enum Role implements GrantedAuthority {
+import java.io.Serializable;
+
+public enum Role implements GrantedAuthority, Serializable {
     ADMIN("Администратор"),
     USER("Пользователь");
 
     private String role;
 
-    Role(String gender) {
-        this.role = gender;
+    Role(String role) {
+        this.role = role;
     }
 
     public String getNameRole() {
         return role;
+    }
+
+    @Override
+    public String getAuthority() {
+        return name();
     }
 
     public static String getById(Long id) {
@@ -23,10 +30,5 @@ public enum Role implements GrantedAuthority {
             }
         }
         return "UNKNOWN";
-    }
-
-    @Override
-    public String getAuthority() {
-        return getNameRole();
     }
 }

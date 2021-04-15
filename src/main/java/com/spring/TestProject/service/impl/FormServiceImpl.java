@@ -3,6 +3,7 @@ package com.spring.TestProject.service.impl;
 import com.spring.TestProject.DTO.FormDTO;
 import com.spring.TestProject.DTO.UserDTO;
 import com.spring.TestProject.model.Form;
+import com.spring.TestProject.model.Role;
 import com.spring.TestProject.model.User;
 import com.spring.TestProject.repository.FormRepository;
 import com.spring.TestProject.repository.UserRepository;
@@ -12,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import ma.glasnost.orika.MapperFacade;
 import org.springframework.stereotype.Service;
 
+import java.beans.Transient;
 import java.util.List;
 
 @Service
@@ -38,6 +40,7 @@ public class FormServiceImpl implements FormService {
     }
 
     @Override
+    @Transient
     public FormDTO update(FormDTO formDTO) {
         if (formRepository.findById(formDTO.getId()).isEmpty()) {
             throw new RuntimeException("Ошибка, нет такой анкеты!");
@@ -57,5 +60,15 @@ public class FormServiceImpl implements FormService {
     @Override
     public List<FormDTO> findAll() {
         return mapperFacade.mapAsList(formRepository.findAll(), FormDTO.class);
+    }
+
+    @Override
+    public List<FormDTO> findAllByUserRole(Role role) {
+        return mapperFacade.mapAsList(formRepository.findAllByUserRole(role), FormDTO.class);
+    }
+
+    @Override
+    public List<FormDTO> findAllBySource(Boolean bool) {
+        return mapperFacade.mapAsList(formRepository.findAllBySource(bool), FormDTO.class);
     }
 }

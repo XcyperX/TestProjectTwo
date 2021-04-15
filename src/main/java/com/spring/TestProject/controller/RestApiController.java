@@ -2,6 +2,7 @@ package com.spring.TestProject.controller;
 
 import com.spring.TestProject.DTO.FormDTO;
 import com.spring.TestProject.DTO.UserDTO;
+import com.spring.TestProject.model.Role;
 import com.spring.TestProject.service.FormService;
 import com.spring.TestProject.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -57,5 +58,20 @@ public class RestApiController {
     @GetMapping("/forms")
     public ResponseEntity<?> getForm() {
         return ResponseEntity.ok(formService.findAll());
+    }
+
+    @GetMapping("/forms/{id}")
+    public ResponseEntity<?> getForm(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(formService.getById(id));
+    }
+
+    @GetMapping("/forms/admins")
+    public ResponseEntity<?> getFormAdmin() {
+        return ResponseEntity.ok(formService.findAllByUserRole(Role.ADMIN));
+    }
+
+    @GetMapping("/forms/users")
+    public ResponseEntity<?> getFormUser() {
+        return ResponseEntity.ok(formService.findAllByUserRole(Role.USER));
     }
 }

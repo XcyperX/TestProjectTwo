@@ -5,11 +5,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
+import java.io.Serializable;
 import java.util.List;
 
 @Data
 @NoArgsConstructor
-public class QuestionDTO {
+public class QuestionDTO implements Serializable {
     @JsonProperty("question_id")
     private Long id;
 
@@ -18,7 +19,7 @@ public class QuestionDTO {
     private String text;
 
     @JsonProperty("answers_list")
-    private List<AnswerDTO> answerDTOList;
+    private List<AnswerDTO> answers;
 
     @JsonProperty("form_id")
     private Long formId;

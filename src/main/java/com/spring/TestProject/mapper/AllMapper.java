@@ -17,27 +17,28 @@ import ma.glasnost.orika.impl.ConfigurableMapper;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Component
 public class AllMapper extends ConfigurableMapper {
     protected void configure(MapperFactory factory) {
         factory.classMap(Form.class, FormDTO.class)
-                .field("user.id", "userId")
+//                .field("user.id", "userId")
                 .byDefault()
                 .customize(new CustomMapper<Form, FormDTO>() {
                     @Override
                     public void mapAtoB(Form form, FormDTO formDTO, MappingContext context) {
                         if (form.getQuestions() != null) {
                             List<Question> questions = new ArrayList<>();
-                            List<Answer> answers = new ArrayList<>();
                             form.getQuestions().forEach(question -> {
+                                List<Answer> answers = new ArrayList<>();
+                                question.setForm(new Form(form.getId()));
                                 question.getAnswers().forEach(answer -> {
                                     answer.setQuestion(new Question(question.getId()));
                                     answers.add(mapperFacade.map(answer, Answer.class));
                                 });
                                 question.setAnswers(answers);
-                                question.setForm(new Form(form.getId()));
                                 questions.add(mapperFacade.map(question, Question.class));
                             });
                             formDTO.setQuestionDTOList(mapperFacade.mapAsList(questions, QuestionDTO.class));
@@ -48,22 +49,24 @@ public class AllMapper extends ConfigurableMapper {
                     @Override
                     public void mapBtoA(FormDTO formDTO, Form form, MappingContext context) {
                         if (formDTO.getQuestionDTOList() != null) {
+//                            if (formDTO.getId() != null) {
+//
+//                            }
                             List<Question> questions = new ArrayList<>();
                             formDTO.getQuestionDTOList().forEach(questionDTO -> {
-                                List<Answer> answers = new ArrayList<>();
                                 Question question = new Question();
+                                List<Answer> answers = new ArrayList<>();
                                 question.setSome(questionDTO.getSome());
                                 question.setText(questionDTO.getText());
                                 question.setForm(form);
-                                answers.clear();
-                                questionDTO.getAnswerDTOList().forEach(answerDTO -> {
+                                questionDTO.getAnswers().forEach(answerDTO -> {
                                     Answer answer = new Answer();
+                                    question.setAnswers(null);
                                     answer.setQuestion(question);
                                     answer.setChoice(answerDTO.getChoice());
                                     answer.setText(answerDTO.getText());
                                     answers.add(answer);
                                 });
-//                                question.setAnswers(mapperFacade.mapAsList(questionDTO.getAnswerDTOList(), Answer.class));
                                 question.setAnswers(answers);
                                 questions.add(question);
                             });
@@ -90,16 +93,16 @@ public class AllMapper extends ConfigurableMapper {
                     @Override
                     public void mapAtoB(Question question, QuestionDTO questionDTO, MappingContext context) {
                         if (question.getAnswers() != null) {
-                            questionDTO.setAnswerDTOList(mapperFacade.mapAsList(question.getAnswers(), AnswerDTO.class));
+                            questionDTO.setAnswers(mapperFacade.mapAsList(question.getAnswers(), AnswerDTO.class));
                         }
                         super.mapAtoB(question, questionDTO, context);
                     }
 
                     @Override
                     public void mapBtoA(QuestionDTO questionDTO, Question question, MappingContext context) {
-                        if (questionDTO.getAnswerDTOList() != null) {
+                        if (questionDTO.getAnswers() != null) {
                             List<Answer> answers = new ArrayList<>();
-                            questionDTO.getAnswerDTOList().forEach(answerDTO -> {
+                            questionDTO.getAnswers().forEach(answerDTO -> {
                                 Answer answer = new Answer();
                                 answer.setChoice(answerDTO.getChoice());
                                 answer.setText(answerDTO.getText());

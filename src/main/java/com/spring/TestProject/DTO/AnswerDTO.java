@@ -5,10 +5,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
+import java.io.Serializable;
 
 @Data
 @NoArgsConstructor
-public class AnswerDTO {
+public class AnswerDTO implements Serializable {
     @JsonProperty("answer_id")
     private Long id;
 

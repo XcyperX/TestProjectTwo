@@ -3,13 +3,14 @@ package com.spring.TestProject.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "forms")
 @Data
-public class Form {
+public class Form implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -17,7 +18,9 @@ public class Form {
     @Column(nullable = false)
     private String nameForm;
 
-    @OneToMany(mappedBy = "form", cascade = CascadeType.ALL)
+    private Boolean source;
+
+    @OneToMany(mappedBy = "form", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Question> questions = new ArrayList<>();
 
     @ManyToOne

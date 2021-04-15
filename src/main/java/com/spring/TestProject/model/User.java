@@ -5,6 +5,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -13,7 +14,7 @@ import java.util.List;
 @Entity
 @Table(name = "users")
 @Data
-public class User implements UserDetails {
+public class User implements UserDetails, Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -24,6 +25,7 @@ public class User implements UserDetails {
 
     private String secondName;
 
+    @Column(unique = true)
     private String login;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
@@ -46,6 +48,14 @@ public class User implements UserDetails {
 
     public String getUserRole() {
         return getRole().getNameRole();
+    }
+
+    public Boolean isAdmin() {
+        return role.name().contains("ADMIN");
+    }
+
+    public Boolean isUser() {
+        return role.name().contains("USER");
     }
 
     @Override
