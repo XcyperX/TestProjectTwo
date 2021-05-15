@@ -9,4 +9,5 @@ import java.util.List;
 public interface FormRepository extends JpaRepository<Form, Long> {
     List<Form> findAllByUserRole(Role role);
     List<Form> findAllBySource(Boolean bool);
+    List<Form> findAllByUserId(Long id);
 }

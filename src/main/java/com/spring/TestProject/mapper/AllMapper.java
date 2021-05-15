@@ -45,13 +45,9 @@ public class AllMapper extends ConfigurableMapper {
                         }
                         super.mapAtoB(form, formDTO, context);
                     }
-
                     @Override
                     public void mapBtoA(FormDTO formDTO, Form form, MappingContext context) {
                         if (formDTO.getQuestionDTOList() != null) {
-//                            if (formDTO.getId() != null) {
-//
-//                            }
                             List<Question> questions = new ArrayList<>();
                             formDTO.getQuestionDTOList().forEach(questionDTO -> {
                                 Question question = new Question();

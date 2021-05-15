@@ -1,7 +1,7 @@
 <#import "login.ftlh" as l>
 <#include "security.ftlh">
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand">АИС</a>
+    <a class="navbar-brand">Система анкетирования</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -19,9 +19,18 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/admin/passed/forms">Пройденные анкеты</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/users">Пользователи</a>
+                </li>
             <#elseif isUser>
                 <li class="nav-item">
                     <a class="nav-link" href="/forms">Анкетирование</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/forms">Создать анкету</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/passed/forms">Пройденные анкеты</a>
                 </li>
             <#else>
             </#if>

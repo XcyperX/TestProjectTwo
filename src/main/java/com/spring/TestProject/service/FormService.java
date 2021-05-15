@@ -11,4 +11,5 @@ public interface FormService extends CRUDService<FormDTO, Long> {
     List<FormDTO> findAll();
     List<FormDTO> findAllByUserRole(Role role);
     List<FormDTO> findAllBySource(Boolean bool);
+    List<FormDTO> findAllByUserId(Long id);
 }

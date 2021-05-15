@@ -17,7 +17,7 @@
             <div id="question">
                 <div class="card card_question mb-2">
                     <div class="card-body">
-                        <div class="row mb-3">
+                        <div class="row mb-3 g-3 align-items-center">
                             <div class="col-auto">
                                 <h4>Тип вопроса:</h4>
                             </div>

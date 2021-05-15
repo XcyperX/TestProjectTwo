@@ -21,6 +21,20 @@ submitNewUser = (user_id) => {
     }
 }
 
+submitUpdateUser = (elem) => {
+    let legacy = elem.parentNode.parentNode;
+    user.user_id = legacy.querySelector("#user_id").value;
+    user.first_name = legacy.querySelector("#first_name").value;
+    user.last_name = legacy.querySelector("#last_name").value;
+    user.second_name = legacy.querySelector("#second_name").value;
+    user.password = legacy.querySelector("#password").value;
+    user.role = legacy.querySelector("#role").value;
+    user.login = legacy.querySelector("#login").value;
+
+    console.log(legacy);
+    updateUserById(user.user_id, user);
+}
+
 submitNewForm = (form_id) => {
     let legacyForm;
     if (form_id == null) {
@@ -172,7 +186,17 @@ createNewForm = (form) => {
             console.log(response);
         }
     });
+}
 
+deleteFormById = (form_id) => {
+    sendRequest('DELETE', '/api/forms/' + form_id).then(response => {
+        if (response.ok) {
+            console.log(response);
+            document.location.reload(true);
+        } else {
+            console.log(response);
+        }
+    });
 }
 
 createNewUser = (user) => {
@@ -190,7 +214,7 @@ updateUserById = (user_id, user) => {
     sendRequest('PUT', '/api/users/' + user_id, user).then(response => {
         if (response.ok) {
             console.log(response);
-            document.location.href = "http://localhost:8080/users";
+            document.location.reload(true);
         } else {
             console.log(response);
         }

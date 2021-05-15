@@ -6,6 +6,8 @@
                     <div id="createUser">
                 <#else>
                     <div id="updateUser">
+                        <input id="user_id" type="text" name="user_id" class="form-control" placeholder="Имя"
+                               value="<#if user?has_content>${user.id}</#if>" hidden>
                 </#if>
                     <div class="form-row mb-2">
                         <div class="col pl-0">
@@ -42,7 +44,7 @@
                             <select id="role" class="form-control">
                                 <#list roles?values as role>
                                     <#if user?has_content>
-                                        <#if role.getNameRole() == user.role>
+                                        <#if role == user.role>
                                             <option value="${role}"
                                                     selected>${role.getNameRole()}</option>
                                         <#else>

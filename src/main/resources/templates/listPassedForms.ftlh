@@ -2,6 +2,8 @@
 <#import "parts/formPage.ftlh" as fp>
 
 <@c.page>
+<a type="button" class="btn btn-secondary mb-3" href="/api/pdf/passed/forms" data-dismiss="modal">Создать отчет пройденных анкет
+</a>
     <table class="table table-bordered mb-0">
         <thead class="thead-dark">
         <tr>
@@ -9,6 +11,7 @@
             <th scope="col">Фамилия</th>
             <th scope="col">Отчество</th>
             <th scope="col">Название анкеты</th>
+            <th scope="col"></th>
             <th scope="col"></th>
         </tr>
         </thead>
@@ -47,6 +50,10 @@
                             </div>
                         </div>
                     </div>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-danger" onclick="deleteFormById(${form.id})">Удалить
+                    </button>
                 </td>
             </tr>
         </#list>
