@@ -74,7 +74,7 @@ public class UiController {
 
     @GetMapping("/users/forms")
     public String listFormsUsers(Model model, @AuthenticationPrincipal User user) {
-        model.addAttribute("forms", formService.findAllByUserId(user.getId()));
+        model.addAttribute("forms", formService.findAllByUserIdAndSource(user.getId(), true));
         return "listFormsUser";
     }
 

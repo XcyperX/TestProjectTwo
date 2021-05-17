@@ -22,7 +22,7 @@
                                         <div class="form-check">
                                             <input class="form-check-input answer_check" type="checkbox" value="false"
                                                    id="answer_check" onclick="testCheck(this)"
-                                                   name="answer_question_${question.id}"
+                                                   name="answer_question_${question.id?c}"
                                                    <#if !source && answer.choice>checked</#if>
                                             <label class="form-check-label" id="answer_text">
                                                 ${answer.text}
@@ -37,7 +37,7 @@
                                             <input class="form-check-input answer_check" type="radio" value="false"
                                                    <#if !source && answer.choice>checked</#if>
                                                    id="answer_check" onclick="checkRadioButton(this)"
-                                                   name="answer_question_${question.id}">
+                                                   name="answer_question_${question.id?c}">
                                             <label class="form-check-label" id="answer_check">
                                                 ${answer.text}
                                             </label>
@@ -51,7 +51,7 @@
             </#list>
         </div>
         <#if source>
-            <button type="button" class="btn btn-primary mb-5" onclick="submitDoneForm(${form.id}, ${user.id})">Завершить
+            <button type="button" class="btn btn-primary mb-5" onclick="submitDoneForm(${form.id?c}, ${user.id?c})">Завершить
                 анкетирование
             </button>
         </#if>

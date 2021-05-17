@@ -76,4 +76,9 @@ public class FormServiceImpl implements FormService {
     public List<FormDTO> findAllByUserId(Long id) {
         return mapperFacade.mapAsList(formRepository.findAllByUserId(id), FormDTO.class);
     }
+
+    @Override
+    public List<FormDTO> findAllByUserIdAndSource(Long id, Boolean bool) {
+        return mapperFacade.mapAsList(formRepository.findAllByUserIdAndSource(id, bool), FormDTO.class);
+    }
 }

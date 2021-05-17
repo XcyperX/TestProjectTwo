@@ -66,11 +66,11 @@
             </td>
             <td>
                 <button type="button" class="btn btn-primary" data-toggle="modal"
-                        data-target="#user_${user.id}">
+                        data-target="#user_${user.id?c}">
                     Список анкет
                 </button>
                 <!-- Modal -->
-                <div class="modal fade" id="user_${user.id}" tabindex="-1" role="dialog"
+                <div class="modal fade" id="user_${user.id?c}" tabindex="-1" role="dialog"
                      aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">
@@ -83,7 +83,7 @@
                                         <#list forms as form>
                                             <#if form.user.id == user.id>
                                             <div class="row">
-                                                <a href="/forms/${form.id}" class="list-group-item list-group-item-action">
+                                                <a href="/forms/${form.id?c}" class="list-group-item list-group-item-action">
                                                     ${form.nameForm}
                                                 </a>
                                             </div>
@@ -102,11 +102,11 @@
             </td>
             <td>
                 <button type="button" class="btn btn-warning" data-toggle="modal"
-                        data-target="#update_${user.id}">
+                        data-target="#update_${user.id?c}">
                     Изменить
                 </button>
                 <!-- Modal -->
-                <div class="modal fade" id="update_${user.id}" tabindex="-1" role="dialog"
+                <div class="modal fade" id="update_${user.id?c}" tabindex="-1" role="dialog"
                      aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-md">
                         <div class="modal-content">
@@ -130,7 +130,7 @@
                 </div>
             </td>
             <td>
-                <button type="button" class="btn btn-danger" onclick="deleteUserById(${user.id})">Удалить
+                <button type="button" class="btn btn-danger" onclick="deleteUserById(${user.id?c})">Удалить
                 </button>
             </td>
             </tr>

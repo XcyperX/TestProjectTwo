@@ -28,11 +28,11 @@
                 <td>${form.nameForm}</td>
                 <td>
                     <button type="button" class="btn btn-primary" data-toggle="modal"
-                            data-target="#form_${form.id}">
+                            data-target="#form_${form.id?c}">
                         Подробности
                     </button>
                     <!-- Modal -->
-                    <div class="modal fade" id="form_${form.id}" tabindex="-1" role="dialog"
+                    <div class="modal fade" id="form_${form.id?c}" tabindex="-1" role="dialog"
                          aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-lg">
                             <div class="modal-content">
@@ -52,7 +52,7 @@
                     </div>
                 </td>
                 <td>
-                    <button type="button" class="btn btn-danger" onclick="deleteFormById(${form.id})">Удалить
+                    <button type="button" class="btn btn-danger" onclick="deleteFormById(${form.id?c})">Удалить
                     </button>
                 </td>
             </tr>

@@ -10,4 +10,5 @@ public interface FormRepository extends JpaRepository<Form, Long> {
     List<Form> findAllByUserRole(Role role);
     List<Form> findAllBySource(Boolean bool);
     List<Form> findAllByUserId(Long id);
+    List<Form> findAllByUserIdAndSource(Long id, Boolean bool);
 }

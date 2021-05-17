@@ -13,7 +13,7 @@
             <div class="list-group">
                 <#list forms as form>
                     <div class="row">
-                        <a href="/forms/${form.id}" class="list-group-item list-group-item-action">
+                        <a href="/forms/${form.id?c}" class="list-group-item list-group-item-action">
                             ${form.nameForm}
                         </a>
                     </div>

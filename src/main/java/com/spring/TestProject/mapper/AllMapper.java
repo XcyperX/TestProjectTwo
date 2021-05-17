@@ -24,7 +24,6 @@ import java.util.List;
 public class AllMapper extends ConfigurableMapper {
     protected void configure(MapperFactory factory) {
         factory.classMap(Form.class, FormDTO.class)
-//                .field("user.id", "userId")
                 .byDefault()
                 .customize(new CustomMapper<Form, FormDTO>() {
                     @Override
